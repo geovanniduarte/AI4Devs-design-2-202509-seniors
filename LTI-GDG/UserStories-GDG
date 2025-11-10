@@ -1,0 +1,288 @@
+# Historias de Usuario
+## Crear puesto de trabajo (Reclutador)
+
+### Descripción
+Como reclutador,  
+quiero crear un puesto de trabajo nuevo ingresando detalles clave del puesto,  
+para que pueda publicar la vacante y comenzar a recibir aplicaciones.
+
+### Criterios de Aceptación
+- El usuario puede ingresar título, departamento, descripción y requisitos del puesto.
+- La vacante se puede publicar en múltiples canales integrados desde la plataforma.
+- La interfaz debe ser sencilla y guiada para facilitar la rápida creación del puesto.
+
+### Notas Adicionales
+La creación debe cumplir con normativas de seguridad y privacidad. Se recomienda validación de campos antes de publicación.
+
+### Historias de Usuario Relacionadas
+- Solicitar aprobación de nuevo puesto (Gerente de área)
+- Gestión integral de vacantes
+
+***
+
+## Crear puesto de trabajo (Gerente de área)
+
+### Descripción
+Como gerente de área,  
+quiero solicitar la creación de un puesto de trabajo especificando criterios del equipo,  
+para asegurar que se publique una vacante adecuada a las necesidades del departamento.
+
+### Criterios de Aceptación
+- El gerente puede definir criterios y necesidades del puesto.
+- Puede revisar y aprobar la solicitud antes de que el reclutador publique la vacante.
+- Recibe notificaciones sobre el estado de la solicitud.
+
+### Notas Adicionales
+Flujo debe garantizar aprobación previa para controlar alineación estratégica.
+
+### Historias de Usuario Relacionadas
+- Crear puesto de trabajo (Reclutador)
+- Gestión integral de vacantes
+
+***
+
+## Agendar entrevistas (Coordinador de reclutamiento)
+
+### Descripción
+Como coordinador de reclutamiento,  
+quiero agendar entrevistas sincronizando con agendas de entrevistadores,  
+para evitar conflictos y asegurar la disponibilidad de todos.
+
+### Criterios de Aceptación
+- Vista consolidada del calendario de entrevistadores.
+- Envío automático de invitaciones y recordatorios a candidatos y entrevistadores.
+- Capacidad para ajustar horarios y gestionar múltiples entrevistas.
+
+### Notas Adicionales
+Integración con calendarios externos para sincronización y notificaciones.
+
+### Historias de Usuario Relacionadas
+- Recepción de citas en calendario (Entrevistador)
+- Programación y gestión de entrevistas
+
+***
+
+## Agendar entrevistas (Entrevistador)
+
+### Descripción
+Como entrevistador,  
+quiero recibir en mi calendario las citas de entrevistas con detalles del candidato y formato,  
+para prepararme adecuadamente y cumplir con mi agenda.
+
+### Criterios de Aceptación
+- Notificaciones automáticas de nuevas entrevistas.
+- Visualización clara de información del candidato y formato (virtual/presencial).
+- Opción para reprogramar o cancelar entrevistas notificando automáticamente a involucrados.
+
+### Notas Adicionales
+Debe ser compatible con dispositivos móviles y escritorio para accesibilidad.
+
+### Historias de Usuario Relacionadas
+- Agendar entrevistas (Coordinador de reclutamiento)
+- Comunicación multicanal con candidatos
+
+# Backlog de producto y Priorización
+
+| Historia de Usuario                    | Impacto y Valor (4) | Urgencia (3) | Complejidad (2) | Riesgos y Dependencias (1) | Puntuación Total | Prioridad    |
+| -------------------------------------- | ------------------- | ------------ | --------------- | -------------------------- | ---------------- | ------------ |
+| Crear puesto de trabajo (Reclutador)   | Alto (3)            | Alto (3)     | Medio (2)       | Bajo (1)                   | 24               | 1 (Más alta) |
+| Crear puesto de trabajo (Gerente área) | Medio (2)           | Medio (2)    | Bajo (1)        | Bajo (1)                   | 15               | 3            |
+| Agendar entrevistas (Coordinador)      | Alto (3)            | Alto (3)     | Medio (2)       | Medio (2)                  | 23               | 2            |
+| Agendar entrevistas (Entrevistador)    | Medio (2)           | Medio (2)    | Bajo (1)        | Medio (2)                  | 14               | 4 (Menor)    |
+
+
+# Tickets de Trabajo (Crear puesto de trabajo (Reclutador)
+
+## Ticket 1: Diseño e Implementación del Formulario de Creación de Puesto
+
+### Descripción Detallada
+
+**Propósito**  
+Crear un formulario intuitivo y guiado para que el reclutador pueda ingresar datos clave de un puesto de trabajo (título, departamento, descripción, requisitos) y publicarlo rápidamente, mejorando la eficiencia del proceso de reclutamiento.
+
+**Detalles Específicos**  
+- Campos de base de datos:  
+  * `job_title` (string, requerido)  
+  * `department` (string, requerido)  
+  * `description` (text, requerido)  
+  * `requirements` (text, requerido)  
+- Endpoint backend: POST `/api/jobs`  
+  * Parámetros: `{ job_title, department, description, requirements }`  
+  * Validaciones: campos obligatorios y formato texto  
+- Frontend:  
+  * Ruta en navegación: `/jobs/create`  
+  * Validación en client-side y server-side  
+  * Mensajes de error claros y ayudas contextuales  
+
+### Criterios de Aceptación
+- El formulario aparece en `/jobs/create` y permite ingresar los campos obligatorios.  
+- Validaciones funcionan tanto en frontend como backend.  
+- Al enviar, se recibe confirmación y el nuevo puesto queda registrado en la base de datos.  
+- Mensajes de error aparecen en casos de datos inválidos o faltantes.
+
+### Prioridad  
+Alta
+
+### Estimación de Esfuerzo  
+5 puntos de historia
+
+### Asignación  
+**Responsable:** Equipo Frontend y Backend
+
+### Etiquetas o Tags  
+UI, Backend, formulario, validación, sprint-6
+
+### Comentarios y Notas  
+Coordinar con diseño UX para validar la usabilidad.
+
+### Enlaces o Referencias  
+- Documentación general LTI ATS  
+- Diseño UI aprobado
+
+### Historial de Cambios  
+| Fecha       | Cambio Realizado                         | Autor        |  
+|-------------|-----------------------------------------|--------------|  
+| 09/11/2025  | Creación inicial del ticket con template| Asistente AI |  
+
+***
+
+## Ticket 2: Publicación Automática en Canales Integrados
+
+### Descripción Detallada
+
+**Propósito**  
+Automatizar la publicación del puesto creado en distintos portales y redes sociales para mayor difusión y ahorro de tiempo operativo.
+
+**Detalles Específicos**  
+- Endpoints backend:  
+  * POST `/api/jobs/{id}/publish` para activar la publicación  
+- Integración con APIs externas (por ejemplo, portal1, portal2, LinkedIn) utilizando credenciales configurables.  
+- Estado de publicación guardado en tabla `job_publications` con campos:  
+  * `job_id` (int)  
+  * `channel` (string)  
+  * `status` (enum: pending, success, failure)  
+  * `timestamp` (datetime)  
+- Control de reintentos automáticos en caso de fallos.
+
+### Criterios de Aceptación
+- Al activar publicación, el sistema publica la vacante en al menos 3 canales configurados.  
+- Se refleja el estado correcto (éxito o fallo) en la interfaz y logs.  
+- El sistema guarda registro detallado de cada publicación.
+
+### Prioridad  
+Alta
+
+### Estimación de Esfuerzo  
+8 puntos de historia
+
+### Asignación  
+**Responsable:** Equipo Backend e Integraciones
+
+### Etiquetas o Tags  
+Integración, backend, API, publicación
+
+### Comentarios y Notas  
+Validar políticas de uso de cada portal para evitar bloqueos.
+
+### Enlaces o Referencias  
+- APIs portales externos  
+- Documentación de LTI ATS
+
+### Historial de Cambios  
+| Fecha       | Cambio Realizado                         | Autor        |  
+|-------------|-----------------------------------------|--------------|  
+| 09/11/2025  | Creación inicial del ticket con template| Asistente AI |  
+
+***
+
+## Ticket 3: Implementación de Seguridad y Control de Acceso
+
+### Descripción Detallada
+
+**Propósito**  
+Garantizar que solo usuarios autorizados puedan crear puestos de trabajo, cumpliendo con normativas y manteniendo la seguridad del sistema.
+
+**Detalles Específicos**  
+- Uso del sistema de roles y permisos existente para validar acceso al endpoint `/api/jobs` y la ruta `/jobs/create`.  
+- Registro de auditoría en tabla `job_audit_log` con campos:  
+  * `user_id` (int)  
+  * `action` (string) — "create_job"  
+  * `job_id` (int)  
+  * `timestamp` (datetime)  
+- Mensajes claros para usuarios sin permiso.
+
+### Criterios de Aceptación
+- Solo usuarios con permiso para creación de puestos pueden acceder a la funcionalidad.  
+- Accesos denegados muestran mensajes claros.  
+- Se registran todas las acciones de creación de puestos para auditoría.
+
+### Prioridad  
+Alta
+
+### Estimación de Esfuerzo  
+4 puntos de historia
+
+### Asignación  
+**Responsable:** Equipo Seguridad y Backend
+
+### Etiquetas o Tags  
+Seguridad, backend, roles
+
+### Comentarios y Notas  
+Debe integrarse con sistema de autentificación y autorización existente.
+
+### Enlaces o Referencias  
+- Políticas de seguridad LTI  
+- Módulo de roles y permisos
+
+### Historial de Cambios  
+| Fecha       | Cambio Realizado                         | Autor        |  
+|-------------|-----------------------------------------|--------------|  
+| 09/11/2025  | Creación inicial del ticket con template| Asistente AI |  
+
+***
+
+## Ticket 4: Pruebas de Integración y Control de Calidad General
+
+### Descripción Detallada
+
+**Propósito**  
+Realizar pruebas integrales para asegurar la estabilidad, usabilidad y correcto funcionamiento del flujo completo de creación de puesto.
+
+**Detalles Específicos**  
+- Pruebas end-to-end desde el frontend hasta la base de datos.  
+- Pruebas de carga simulando múltiples usuarios creando puestos simultáneamente.  
+- Validación de logs y manejo de errores.  
+- Reportes de cobertura y errores.
+
+### Criterios de Aceptación
+- Flujo completo probado sin errores críticos.  
+- Rendimiento aceptable bajo presión simulada.  
+- Correcta gestión y reporte de errores.
+
+### Prioridad  
+Alta
+
+### Estimación de Esfuerzo  
+3 puntos de historia
+
+### Asignación  
+**Responsable:** Equipo QA y DevOps
+
+### Etiquetas o Tags  
+QA, pruebas, integración, rendimiento
+
+### Comentarios y Notas  
+Coordinar con equipos de desarrollo para pruebas conjuntas.
+
+### Enlaces o Referencias  
+- Plan de pruebas LTI ATS  
+- Herramientas de testing utilizadas
+
+### Historial de Cambios  
+| Fecha       | Cambio Realizado                         | Autor        |  
+|-------------|-----------------------------------------|--------------|  
+| 09/11/2025  | Creación inicial del ticket con template| Asistente AI |  
+
+
+
